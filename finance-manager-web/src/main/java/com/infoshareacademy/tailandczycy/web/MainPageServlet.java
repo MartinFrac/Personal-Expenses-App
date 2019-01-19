@@ -1,8 +1,5 @@
 package com.infoshareacademy.tailandczycy.web;
 
-import com.infoshareacademy.tailandczycy.dao.BudgetDao;
-import com.infoshareacademy.tailandczycy.dao.CategoryDao;
-import com.infoshareacademy.tailandczycy.dao.ExpenseDao;
 import com.infoshareacademy.tailandczycy.freemarker.TemplateProvider;
 
 import freemarker.template.Template;
@@ -25,16 +22,6 @@ public class MainPageServlet extends HttpServlet {
 
     @Inject
     private TemplateProvider templateProvider;
-
-    @Inject
-    CategoryDao categoryDao;
-
-    @Inject
-    ExpenseDao expenseDao;
-
-    @Inject
-    BudgetDao budgetDao;
-
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
