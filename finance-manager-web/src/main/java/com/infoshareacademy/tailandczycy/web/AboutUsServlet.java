@@ -1,9 +1,7 @@
 package com.infoshareacademy.tailandczycy.web;
 
+import com.infoshareacademy.tailandczycy.cdi.TemplateBean;
 import com.infoshareacademy.tailandczycy.dao.CategoryDao;
-import com.infoshareacademy.tailandczycy.freemarker.TemplateProvider;
-import freemarker.template.Template;
-import freemarker.template.TemplateException;
 
 import javax.inject.Inject;
 import javax.servlet.annotation.WebServlet;
@@ -23,7 +21,7 @@ public class AboutUsServlet extends HttpServlet {
     private static final String TEMPLATE_NAME = "static/aboutUs";
 
     @Inject
-    private TemplateProvider templateProvider;
+    TemplateBean templateBean;
 
     @Inject
     CategoryDao categoryDao;
@@ -31,17 +29,8 @@ public class AboutUsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
-        resp.addHeader("Content-Type", "text/html; charset=utf-8");
-
-        Map<String, Object> model = new HashMap<>();
-        model.put("expenses", categoryDao.findCategoriesEven(new BigDecimal(800)));
-
-        Template template = templateProvider.getTemplate(getServletContext(), TEMPLATE_NAME);
-
-        try {
-            template.process(model, resp.getWriter());
-        } catch (TemplateException e) {
-            e.printStackTrace();
-        }
+        Map<String, Object> dataModel = new HashMap<>();
+        dataModel.put("expenses", categoryDao.findCategoriesEven(new BigDecimal(800)));
+        templateBean.handleTemplate(dataModel, TEMPLATE_NAME, resp, getServletContext());
     }
 }

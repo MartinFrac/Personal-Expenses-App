@@ -24,7 +24,7 @@ public class ExpenseBean {
     @Inject
     private CategoryDao categoryDao;
 
-    public ExpenseDto getRequestView(HttpServletRequest req) {
+    public ExpenseDto getExpenseDto(HttpServletRequest req) {
         ExpenseDto expenseDto = new ExpenseDto();
         List<String> categoriesString = new ArrayList<>(Arrays.asList(req.getParameterValues("categories")));
         List<Category> categories = categoryDao.findCategoriesByNames(categoriesString);
@@ -62,7 +62,7 @@ public class ExpenseBean {
         expense.setCategories(expenseDto.getCategories());
         expense.getCategories()
                 .forEach(category -> {
-                                        category.getTotal().add(expenseDto.getAmount());
+                                        category.setTotal(category.getTotal().add(expenseDto.getAmount()));
                                         categoryDao.update(category);
                                      });
         expenseDao.save(expense);
@@ -73,7 +73,6 @@ public class ExpenseBean {
     }
 
     private BigDecimal parseStringToBigDecimal(String param) {
-
         return new BigDecimal(param).setScale(2, RoundingMode.HALF_UP);
     }
 }
