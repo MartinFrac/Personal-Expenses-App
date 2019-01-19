@@ -3,6 +3,7 @@ package com.infoshareacademy.tailandczycy.web;
 import com.infoshareacademy.tailandczycy.cdi.CategoryBean;
 import com.infoshareacademy.tailandczycy.cdi.TemplateBean;
 import com.infoshareacademy.tailandczycy.dto.CategoryDto;
+import com.infoshareacademy.tailandczycy.statics.Templates;
 
 import javax.inject.Inject;
 import javax.servlet.annotation.WebServlet;
@@ -15,8 +16,6 @@ import java.util.Map;
 
 @WebServlet(urlPatterns = "edit-category")
 public class EditCategory extends HttpServlet {
-    private static final String TEMPLATE_NAME = "edit-category";
-    private static final String TEMPLATE_EXPENSES_LIST = "/expenses";
 
     @Inject
     TemplateBean templateBean;
@@ -29,12 +28,12 @@ public class EditCategory extends HttpServlet {
         CategoryDto categoryRequestView = categoryBean.getCategoryById(Long.parseLong(req.getParameter("id")));
         Map<String, Object> dataModel = new HashMap<>();
         dataModel.put("category", categoryRequestView);
-        templateBean.handleTemplate(dataModel, TEMPLATE_NAME, resp, getServletContext());
+        templateBean.handleTemplate(dataModel, Templates.EDIT_CATEGORY, resp, getServletContext());
         handleResponse(resp, categoryRequestView);
     }
 
     private void handleResponse(HttpServletResponse resp, CategoryDto categoryView) throws IOException {
         categoryBean.saveCategory(categoryView);
-        resp.sendRedirect(TEMPLATE_EXPENSES_LIST);
+        resp.sendRedirect(Templates.HOME);
     }
 }

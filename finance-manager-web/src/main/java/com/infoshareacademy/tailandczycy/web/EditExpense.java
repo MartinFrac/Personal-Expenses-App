@@ -2,10 +2,8 @@ package com.infoshareacademy.tailandczycy.web;
 
 import com.infoshareacademy.tailandczycy.cdi.ExpenseBean;
 import com.infoshareacademy.tailandczycy.cdi.TemplateBean;
-import com.infoshareacademy.tailandczycy.freemarker.TemplateProvider;
 import com.infoshareacademy.tailandczycy.dto.ExpenseDto;
-import freemarker.template.Template;
-import freemarker.template.TemplateException;
+import com.infoshareacademy.tailandczycy.statics.Templates;
 
 import javax.inject.Inject;
 import javax.servlet.annotation.WebServlet;
@@ -15,13 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 @WebServlet(urlPatterns = "edit-expense")
 public class EditExpense extends HttpServlet {
-    private static final String TEMPLATE_NAME = "edit-expense";
-    private static final String TEMPLATE_EXPENSES_LIST = "/expenses";
 
     @Inject
     TemplateBean templateBean;
@@ -35,12 +29,12 @@ public class EditExpense extends HttpServlet {
         ExpenseDto expenseDto = expenseBean.getExpenseById(Long.parseLong(req.getParameter("id")));
         Map<String, Object> dataModel = new HashMap<>();
         dataModel.put("expense", expenseDto);
-        templateBean.handleTemplate(dataModel, TEMPLATE_NAME, resp, getServletContext());
+        templateBean.handleTemplate(dataModel, Templates.EDIT_EXPENSE, resp, getServletContext());
         handleResponse(resp, expenseDto);
     }
 
     private void handleResponse(HttpServletResponse resp, ExpenseDto expenseView) throws IOException {
         expenseBean.saveExpense(expenseView);
-        resp.sendRedirect(TEMPLATE_EXPENSES_LIST);
+        resp.sendRedirect(Templates.HOME);
     }
 }

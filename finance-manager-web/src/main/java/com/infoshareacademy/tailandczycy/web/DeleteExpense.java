@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.util.HashMap;
 
 @WebServlet("/delete-expense")
-public class DeleteExpenseServlet extends HttpServlet {
+public class DeleteExpense extends HttpServlet {
     private static final String TEMPLATE_NAME = "delete-expense";
 
     @Inject

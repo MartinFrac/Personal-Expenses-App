@@ -3,6 +3,7 @@ package com.infoshareacademy.tailandczycy.web;
 import com.infoshareacademy.tailandczycy.cdi.TemplateBean;
 import com.infoshareacademy.tailandczycy.dao.CategoryDao;
 import com.infoshareacademy.tailandczycy.model.Category;
+import com.infoshareacademy.tailandczycy.statics.Templates;
 
 import javax.inject.Inject;
 import javax.servlet.annotation.WebServlet;
@@ -14,8 +15,6 @@ import java.util.HashMap;
 
 @WebServlet(urlPatterns = "/delete-category")
 public class DeleteCategory extends HttpServlet {
-
-    private final static String TEMPLATE_NAME = "delete-category";
 
     @Inject
     private TemplateBean templateBean;
@@ -30,6 +29,6 @@ public class DeleteCategory extends HttpServlet {
         Category category = categoryDao.findById(id);
         dataModel.put("category", category);
         categoryDao.delete(category.getId());
-        templateBean.handleTemplate(dataModel, TEMPLATE_NAME, resp, getServletContext());
+        templateBean.handleTemplate(dataModel, Templates.DELETE_CATEGORY, resp, getServletContext());
     }
 }

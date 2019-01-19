@@ -1,6 +1,7 @@
 package com.infoshareacademy.tailandczycy.web;
 
 import com.infoshareacademy.tailandczycy.cdi.TemplateBean;
+import com.infoshareacademy.tailandczycy.statics.Templates;
 
 import javax.inject.Inject;
 import javax.servlet.annotation.WebServlet;
@@ -11,8 +12,7 @@ import java.io.IOException;
 import java.util.*;
 
 @WebServlet(urlPatterns = "/home")
-public class MainPageServlet extends HttpServlet {
-    private static final String TEMPLATE_NAME = "welcome";
+public class Home extends HttpServlet {
 
     @Inject
     private TemplateBean templateBean;
@@ -24,7 +24,7 @@ public class MainPageServlet extends HttpServlet {
         Map<String, Object> dataModel = new HashMap<>();
         List<Integer> expenses = new ArrayList<>();
         dataModel.put("expenses", expenses);
-        templateBean.handleTemplate(dataModel, TEMPLATE_NAME, resp, getServletContext());
+        templateBean.handleTemplate(dataModel, Templates.HOME, resp, getServletContext());
     }
 }
 
