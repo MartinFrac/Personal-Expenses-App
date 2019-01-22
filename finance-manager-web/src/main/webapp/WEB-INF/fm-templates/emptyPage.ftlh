@@ -1,4 +1,4 @@
-<#include "head.ftlh">
+<#include "static/head.ftlh">
 <div class="wrapper">
     <!-- Sidebar  -->
     <nav id="sidebar">
@@ -79,5 +79,5 @@
                 </div>
             </div>
         </nav>
-    <#include "footer.ftlh">
-    <#include "scripts.ftlh">
+    <#include "static/footer.ftlh">
+    <#include "static/scripts.ftlh">

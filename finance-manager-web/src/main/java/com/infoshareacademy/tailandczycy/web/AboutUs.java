@@ -16,7 +16,7 @@ import java.util.Map;
 @WebServlet(urlPatterns = "/about")
 public class AboutUs extends HttpServlet {
 
-    private static final String TEMPLATE_NAME = "static/aboutUs";
+    private static final String TEMPLATE_NAME = "/aboutUs";
 
     @Inject
     TemplateBean templateBean;
