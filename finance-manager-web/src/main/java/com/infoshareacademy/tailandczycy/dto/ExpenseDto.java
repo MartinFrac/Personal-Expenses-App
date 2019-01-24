@@ -7,12 +7,12 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class ExpenseDto {
-    private Long id;
-    private String name;
-    private String comment;
-    private BigDecimal amount;
-    private LocalDate date;
-    private List<Category> categories;
+    Long id;
+    String name;
+    String comment;
+    BigDecimal amount;
+    LocalDate date;
+    List<Category> categories;
 
     public Long getId() {
         return id;
