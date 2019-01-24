@@ -20,7 +20,6 @@ public class Home extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
-        resp.addHeader("Content-Type", "text/html; charset=utf-8");
         Map<String, Object> dataModel = new HashMap<>();
         List<Integer> expenses = new ArrayList<>();
         dataModel.put("expenses", expenses);

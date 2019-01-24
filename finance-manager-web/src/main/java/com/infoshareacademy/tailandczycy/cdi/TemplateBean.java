@@ -21,11 +21,11 @@ public class TemplateBean {
     @Inject
     TemplateProvider templateProvider;
 
-    public void handleTemplate(Map<String, Object> model, String templateName, HttpServletResponse resp, ServletContext servletContext) throws IOException {
+    public void handleTemplate(Map<String, Object> dataModel, String templateName, HttpServletResponse resp, ServletContext servletContext) throws IOException {
         Template template = templateProvider.getTemplate(servletContext, templateName);
 
         try {
-            template.process(model, resp.getWriter());
+            template.process(dataModel, resp.getWriter());
         } catch (TemplateException e) {
             logger.error(e.getMessage());
         }
