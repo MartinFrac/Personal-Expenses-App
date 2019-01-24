@@ -26,4 +26,3 @@ public class Home extends HttpServlet {
         templateBean.handleTemplate(dataModel, Templates.HOME, resp, getServletContext());
     }
 }
-
