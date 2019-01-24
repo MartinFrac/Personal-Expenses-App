@@ -6,14 +6,14 @@ import freemarker.template.TemplateException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ApplicationScoped;
 import javax.inject.Inject;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Map;
 
-@RequestScoped
+@ApplicationScoped
 public class TemplateBean {
 
     private Logger logger = LoggerFactory.getLogger(getClass().getName());
