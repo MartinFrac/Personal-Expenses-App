@@ -18,13 +18,17 @@
         <li>
             <a href="add-expense">
                 <i class="fas fa-briefcase"></i>
-                Expenses
+                Add expense
             </a>
-            <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+
+            <a href="#categorySubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
                 <i class="fas fa-copy"></i>
-                Categories
+                Category
             </a>
-            <ul class="collapse list-unstyled" id="pageSubmenu">
+            <ul class="collapse list-unstyled" id="categorySubmenu">
+                <li>
+                    <a href="show-categories">Show Categories</a>
+                </li>
                 <li>
                     <a href="add-category">Add</a>
                 </li>
