@@ -4,6 +4,8 @@ import com.infoshareacademy.tailandczycy.cdi.TemplateBean;
 import com.infoshareacademy.tailandczycy.statics.Templates;
 
 import javax.inject.Inject;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -24,5 +26,16 @@ public class Home extends HttpServlet {
         List<Integer> expenses = new ArrayList<>();
         dataModel.put("expenses", expenses);
         templateBean.handleTemplate(dataModel, Templates.HOME, resp, getServletContext());
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        if (req.getParameter("edit")!=null) {
+            RequestDispatcher requestDispatcher = req.getRequestDispatcher("/edit-expense");
+            requestDispatcher.forward(req, resp);
+        }
+        if (req.getParameter("delete")!=null) {
+            resp.sendRedirect("/delete-expense");
+        }
     }
 }
