@@ -35,8 +35,10 @@
                             <td>${e.amount}</td>
                             <td>${e.comment}</td>
                             <td>
-                                <button type="button" class="btn btn-primary btn-sm">Edit</button>&nbsp;
-                                <button type="button" class="btn btn-danger btn-sm">Delete</button>
+                                <form method="post" action="/home">
+                                    <button type="button" name="edit" value="edit" class="btn btn-primary btn-sm">Edit</button>&nbsp;
+                                    <button type="button" name="delete" value="delete" class="btn btn-danger btn-sm">Delete</button>
+                                </form>
                             </td>
                         </tr>
                     </#items>
