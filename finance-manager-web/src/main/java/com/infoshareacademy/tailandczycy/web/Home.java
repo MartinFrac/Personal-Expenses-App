@@ -35,7 +35,8 @@ public class Home extends HttpServlet {
             requestDispatcher.forward(req, resp);
         }
         if (req.getParameter("delete")!=null) {
-            resp.sendRedirect("/delete-expense");
+            RequestDispatcher requestDispatcher = req.getRequestDispatcher("/delete-expense");
+            requestDispatcher.forward(req,resp);
         }
     }
 }
