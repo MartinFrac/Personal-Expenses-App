@@ -36,8 +36,8 @@
                             <td>${e.comment}</td>
                             <td>
                                 <form method="post" action="/home">
-                                    <button type="button" name="edit" value="edit" class="btn btn-primary btn-sm">Edit</button>&nbsp;
-                                    <button type="button" name="delete" value="delete" class="btn btn-danger btn-sm">Delete</button>
+                                    <button type="button" name="editId" value="${e.id}" class="btn btn-primary btn-sm">Edit</button>&nbsp;
+                                    <button type="button" name="deleteId" value="${e.id}" class="btn btn-danger btn-sm">Delete</button>
                                 </form>
                             </td>
                         </tr>
