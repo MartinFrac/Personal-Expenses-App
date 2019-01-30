@@ -6,7 +6,7 @@
 </head>
 <body>
 <div class="wrapper">
-    <!-- Sidebar  -->
+
     <#include "static/sidebar.ftlh">
 
     <div id="content">
