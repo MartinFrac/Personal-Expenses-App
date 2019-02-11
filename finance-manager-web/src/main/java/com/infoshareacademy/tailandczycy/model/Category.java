@@ -1,5 +1,7 @@
 package com.infoshareacademy.tailandczycy.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
@@ -49,10 +51,6 @@ public class Category {
     @ManyToMany(mappedBy = "categories")
     private List<Expense> expenses;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
-
     public Category() {
     }
 
@@ -97,6 +95,7 @@ public class Category {
     public void setExpenses(List<Expense> expenses) {
         this.expenses = expenses;
     }
+
 
     @Override
     public boolean equals(Object o) {
