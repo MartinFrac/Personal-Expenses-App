@@ -9,21 +9,33 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 @RequestScoped
 public class CategoryBean {
+
     @Inject
     private CategoryDao categoryDao;
 
-    public CategoryDto getCategoryDto(HttpServletRequest req) {
-        CategoryDto categoryDto = new CategoryDto();
-        categoryDto.setId(parseStringToLong(req.getParameter("id")));
-        categoryDto.setLimit(parseStringToBigDecimal(req.getParameter("limit")));
-        String category = req.getParameter("name");
-        if (validateParameter(category)) {
-            return null;
+    public List<CategoryDto> getCategoryDtos() {
+
+        List<CategoryDto> categoryDtos = new ArrayList<>();
+
+        for(Category category: categoryDao.findAll()) {
+            categoryDtos.add(getCategoryDto(category));
         }
-        categoryDto.setName(category);
+
+        return categoryDtos;
+    }
+
+    public CategoryDto getCategoryDto(Category category) {
+        CategoryDto categoryDto = new CategoryDto();
+        categoryDto.setId(category.getId());
+        categoryDto.setName(category.getName());
+        categoryDto.setTotal(category.getTotal());
+        categoryDto.setLimit(category.getLimit());
+
         return categoryDto;
     }
 
@@ -53,22 +65,5 @@ public class CategoryBean {
         if (newCategory) {
             categoryDao.save(category);
         }
-    }
-
-    private Long parseStringToLong(String param) {
-        if (validateParameter(param)) return null;
-        return Long.parseLong(param);
-    }
-
-    private BigDecimal parseStringToBigDecimal(String param) {
-        if (param == null || param.isEmpty() || StringUtils.isNumeric(param)) {
-            return null;
-        }
-        return new BigDecimal(param);
-    }
-
-
-    private boolean validateParameter(String param) {
-        return param == null || param.isEmpty() || !StringUtils.isNumeric(param);
     }
 }

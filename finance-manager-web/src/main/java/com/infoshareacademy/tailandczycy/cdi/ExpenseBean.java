@@ -33,7 +33,6 @@ public class ExpenseBean {
         expenseDto.setComment(req.getParameter("comment"));
         expenseDto.setAmount(parseStringToBigDecimal(req.getParameter("amount")));
         expenseDto.setDate(parseStringToLocalDate(req.getParameter("date")));
-        expenseDto.setCategories(categories);
 
         return expenseDto;
     }
@@ -59,7 +58,6 @@ public class ExpenseBean {
         expense.setAmount(expenseDto.getAmount());
         expense.setComment(expense.getComment());
         expense.setDate(expenseDto.getDate());
-        expense.setCategories(expenseDto.getCategories());
         expense.getCategories()
                 .forEach(category -> {
                                         category.setTotal(category.getTotal().add(expenseDto.getAmount()));
