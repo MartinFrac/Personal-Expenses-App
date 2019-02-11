@@ -1,7 +1,5 @@
 package com.infoshareacademy.tailandczycy.dto;
 
-import com.infoshareacademy.tailandczycy.model.Category;
-
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
@@ -12,7 +10,7 @@ public class ExpenseDto {
     private String comment;
     private BigDecimal amount;
     private LocalDate date;
-    private List<Category> categories;
+    private List<String> categories;
 
     public Long getId() {
         return id;
@@ -54,11 +52,11 @@ public class ExpenseDto {
         this.date = date;
     }
 
-    public List<Category> getCategories() {
+    public List<String> getCategories() {
         return categories;
     }
 
-    public void setCategories(List<Category> categories) {
+    public void setCategories(List<String> categories) {
         this.categories = categories;
     }
 }
