@@ -1,7 +1,7 @@
 package com.infoshareacademy.tailandczycy.service;
 
-import com.infoshareacademy.tailandczycy.dao.CategoryDao;
-import com.infoshareacademy.tailandczycy.model.Category;
+import com.infoshareacademy.tailandczycy.cdi.CategoryBean;
+import com.infoshareacademy.tailandczycy.dto.CategoryDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,7 +24,7 @@ public class CategoryService {
     private UriInfo uriInfo;
 
     @Inject
-    CategoryDao categoryDao;
+    CategoryBean categoryBean;
 
     public CategoryService() {
     }
@@ -34,7 +34,7 @@ public class CategoryService {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getCategories() {
 
-        List<Category> categories = categoryDao.findAll();
+        List<CategoryDto> categories = categoryBean.getCategoryDtos();
 
         logger.info("Found {} categories", categories.size());
 
