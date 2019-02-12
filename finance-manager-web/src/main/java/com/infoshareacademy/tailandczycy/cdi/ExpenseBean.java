@@ -16,6 +16,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 @RequestScoped
 public class ExpenseBean {
@@ -37,19 +38,21 @@ public class ExpenseBean {
         return expenseDto;
     }
 
-    public ExpenseDto getExpenseById(Long id) {
-        Expense expenseById = expenseDao.findById(id);
-        if (expenseById == null) {
-            return null;
+    public Optional<ExpenseDto> getExpenseById(Long id) {
+
+        Optional<Expense> expenseById = expenseDao.findById(id);
+
+        if (expenseById.isEmpty()) {
+            return Optional.empty();
         }
         ExpenseDto expenseDto = new ExpenseDto();
 
-        expenseDto.setId(expenseById.getId());
-        expenseDto.setAmount(expenseById.getAmount());
-        expenseDto.setComment(expenseById.getComment());
-        expenseDto.setDate(expenseById.getDate());
+        expenseDto.setId(expenseById.get().getId());
+        expenseDto.setAmount(expenseById.get().getAmount());
+        expenseDto.setComment(expenseById.get().getComment());
+        expenseDto.setDate(expenseById.get().getDate());
 
-        return expenseDto;
+        return Optional.of(expenseDto);
     }
 
     public void saveExpense(ExpenseDto expenseDto) {

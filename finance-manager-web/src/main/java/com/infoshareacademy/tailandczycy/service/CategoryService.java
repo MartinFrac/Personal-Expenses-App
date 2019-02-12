@@ -34,7 +34,7 @@ public class CategoryService {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getCategories() {
 
-        List<CategoryDto> categories = categoryBean.getCategoryDtos();
+        List<CategoryDto> categories = categoryBean.getAllCategoryDtos();
 
         logger.info("Found {} categories", categories.size());
 

@@ -9,6 +9,7 @@ import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 
 import static com.infoshareacademy.tailandczycy.dao.ExpenseDao.PARAM1;
 
@@ -34,8 +35,8 @@ public class CategoryDao {
         }
     }
 
-    public Category findById(Long id) {
-        return entityManager.find(Category.class, id);
+    public Optional<Category> findById(Long id) {
+        return Optional.ofNullable(entityManager.find(Category.class, id));
     }
 
     public List<Category> findAll() {

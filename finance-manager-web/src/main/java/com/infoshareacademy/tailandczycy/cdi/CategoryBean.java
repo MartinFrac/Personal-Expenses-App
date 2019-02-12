@@ -1,69 +1,44 @@
 package com.infoshareacademy.tailandczycy.cdi;
 
 import com.infoshareacademy.tailandczycy.dao.CategoryDao;
+import com.infoshareacademy.tailandczycy.mappers.CategoryDtoMapper;
 import com.infoshareacademy.tailandczycy.model.Category;
 import com.infoshareacademy.tailandczycy.dto.CategoryDto;
-import org.apache.commons.lang3.StringUtils;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
-import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RequestScoped
 public class CategoryBean {
 
     @Inject
-    private CategoryDao categoryDao;
+    CategoryDao categoryDao;
 
-    public List<CategoryDto> getCategoryDtos() {
+    @Inject
+    CategoryDtoMapper categoryDtoMapper;
 
-        List<CategoryDto> categoryDtos = new ArrayList<>();
+    public Optional<CategoryDto> getCategoryDtoById(Long id) {
+        Optional<Category> categoryById = categoryDao.findById(id);
 
-        for(Category category: categoryDao.findAll()) {
-            categoryDtos.add(getCategoryDto(category));
+        if(categoryById.isEmpty()) {
+            return Optional.empty();
         }
-
-        return categoryDtos;
+        return Optional.of(categoryDtoMapper.getCategoryDto(categoryById.get()));
     }
 
-    public CategoryDto getCategoryDto(Category category) {
-        CategoryDto categoryDto = new CategoryDto();
-        categoryDto.setId(category.getId());
-        categoryDto.setName(category.getName());
-        categoryDto.setTotal(category.getTotal());
-        categoryDto.setLimit(category.getLimit());
-
-        return categoryDto;
-    }
-
-    public CategoryDto getCategoryById(Long id) {
-        Category categoryById = categoryDao.findById(id);
-        if (categoryById == null) {
-            return null;
-        }
-        CategoryDto categoryDto = new CategoryDto();
-
-        categoryDto.setName(categoryById.getName());
-        categoryDto.setLimit(categoryById.getLimit());
-        return categoryDto;
+    public List<CategoryDto> getAllCategoryDtos() {
+        return categoryDao.findAll().stream()
+                .map(c -> categoryDtoMapper.getCategoryDto(c))
+                .collect(Collectors.toList());
     }
 
     public void saveCategory(CategoryDto categoryDto) {
-        Category category = categoryDao.findById(categoryDto.getId());
-        boolean newCategory = false;
-        if (category == null) {
-            category = new Category();
-            newCategory = true;
-        }
-
-        category.setLimit(categoryDto.getLimit());
+        Category category = new Category();
         category.setName(categoryDto.getName());
-
-        if (newCategory) {
-            categoryDao.save(category);
-        }
+        category.setLimit(categoryDto.getLimit());
+        categoryDao.save(category);
     }
 }

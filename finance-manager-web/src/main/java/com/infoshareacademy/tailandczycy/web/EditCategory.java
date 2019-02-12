@@ -25,7 +25,7 @@ public class EditCategory extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         resp.addHeader("Content-Type", "text/html; charset=utf-8");
-        CategoryDto categoryRequestView = categoryBean.getCategoryById(Long.parseLong(req.getParameter("id")));
+        CategoryDto categoryRequestView = categoryBean.getCategoryDtoById(Long.parseLong(req.getParameter("id")));
         Map<String, Object> dataModel = new HashMap<>();
         dataModel.put("category", categoryRequestView);
         templateBean.handleTemplate(dataModel, Templates.EDIT_CATEGORY, resp, getServletContext());

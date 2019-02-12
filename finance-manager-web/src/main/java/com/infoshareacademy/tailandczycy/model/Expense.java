@@ -44,7 +44,7 @@ import java.util.Objects;
         ),
         @NamedQuery(
                 name = "Expense.findExpensesByName",
-                query = "SELECT e FROM Expense e WHERE e.name = :param1 ORDER BY e.date"
+                query = "SELECT e FROM Expense e WHERE e.name IN :param1"
         ),
         @NamedQuery(
                 name = "Expense.orderByDateAsc",
