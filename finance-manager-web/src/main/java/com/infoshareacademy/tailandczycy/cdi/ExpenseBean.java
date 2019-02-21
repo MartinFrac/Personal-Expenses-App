@@ -42,17 +42,17 @@ public class ExpenseBean {
 
         Optional<Expense> expenseById = expenseDao.findById(id);
 
-        if (expenseById.isEmpty()) {
-            return Optional.empty();
+        if (expenseById.isPresent()) {
+            ExpenseDto expenseDto = new ExpenseDto();
+
+            expenseDto.setId(expenseById.get().getId());
+            expenseDto.setAmount(expenseById.get().getAmount());
+            expenseDto.setComment(expenseById.get().getComment());
+            expenseDto.setDate(expenseById.get().getDate());
+
+            return Optional.of(expenseDto);
         }
-        ExpenseDto expenseDto = new ExpenseDto();
-
-        expenseDto.setId(expenseById.get().getId());
-        expenseDto.setAmount(expenseById.get().getAmount());
-        expenseDto.setComment(expenseById.get().getComment());
-        expenseDto.setDate(expenseById.get().getDate());
-
-        return Optional.of(expenseDto);
+        return Optional.empty();
     }
 
     public void saveExpense(ExpenseDto expenseDto) {

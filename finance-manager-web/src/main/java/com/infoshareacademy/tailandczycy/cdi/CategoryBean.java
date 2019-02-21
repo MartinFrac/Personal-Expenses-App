@@ -23,10 +23,7 @@ public class CategoryBean {
     public Optional<CategoryDto> getCategoryDtoById(Long id) {
         Optional<Category> categoryById = categoryDao.findById(id);
 
-        if(categoryById.isEmpty()) {
-            return Optional.empty();
-        }
-        return Optional.of(categoryDtoMapper.getCategoryDto(categoryById.get()));
+        return categoryById.map(category -> categoryDtoMapper.getCategoryDto(category));
     }
 
     public List<CategoryDto> getAllCategoryDtos() {
