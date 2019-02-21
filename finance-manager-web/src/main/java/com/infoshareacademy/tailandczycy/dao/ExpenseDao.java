@@ -42,7 +42,7 @@ public class ExpenseDao {
     }
 
     public List<Expense> findAll() {
-        final TypedQuery<Expense> query = entityManager.createQuery("SELECT s FROM Expense s", Expense.class);
+        final TypedQuery<Expense> query = entityManager.createQuery("SELECT s FROM Expense s join fetch s.categories", Expense.class);
 
         return query.getResultList();
     }

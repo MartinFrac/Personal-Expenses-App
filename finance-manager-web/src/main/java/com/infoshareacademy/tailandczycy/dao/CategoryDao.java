@@ -19,13 +19,13 @@ public class CategoryDao {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public Long save(Category s) {
-        entityManager.persist(s);
-        return s.getId();
+    public Long save(Category c) {
+        entityManager.persist(c);
+        return c.getId();
     }
 
-    public Category update(Category s) {
-        return entityManager.merge(s);
+    public Category update(Category c) {
+        return entityManager.merge(c);
     }
 
     public void delete(Long id) {
@@ -40,7 +40,7 @@ public class CategoryDao {
     }
 
     public List<Category> findAll() {
-        final Query query = entityManager.createQuery("SELECT s FROM Category s");
+        final Query query = entityManager.createQuery("SELECT c FROM Category c join fetch c.expenses");
 
         return query.getResultList();
     }
