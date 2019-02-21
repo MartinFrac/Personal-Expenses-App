@@ -45,14 +45,6 @@
                     </span>
                 </div>
             </div>
-            <#list categories as c>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                    <label class="form-check-label" for="defaultCheck1">
-                        ${c.name}
-                    </label>
-                </div>
-            </#list>
             <!--
             <div class="form-check">
                 <input class="form-check-input" type="checkbox" value="" id="defaultCheck2" disabled>
@@ -66,5 +58,8 @@
 </div>
 <#include "static/footer.ftlh">
 <#include "static/scripts.ftlh">
+<script type="text/javascript" src="/scripts/script.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
+<script type="text/javascript" src="/scripts/getCategories.js"></script>
 </body>
 </html>
