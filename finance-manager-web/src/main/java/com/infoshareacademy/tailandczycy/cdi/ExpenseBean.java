@@ -3,7 +3,6 @@ package com.infoshareacademy.tailandczycy.cdi;
 import com.infoshareacademy.tailandczycy.dao.CategoryDao;
 import com.infoshareacademy.tailandczycy.dao.ExpenseDao;
 
-import com.infoshareacademy.tailandczycy.model.Category;
 import com.infoshareacademy.tailandczycy.model.Expense;
 import com.infoshareacademy.tailandczycy.dto.ExpenseDto;
 
@@ -28,12 +27,12 @@ public class ExpenseBean {
     public ExpenseDto getExpenseDto(HttpServletRequest req) {
         ExpenseDto expenseDto = new ExpenseDto();
         List<String> categoriesString = new ArrayList<>(Arrays.asList(req.getParameterValues("categories")));
-        List<Category> categories = categoryDao.findCategoriesByNames(categoriesString);
 
         expenseDto.setName(req.getParameter("name"));
         expenseDto.setComment(req.getParameter("comment"));
         expenseDto.setAmount(parseStringToBigDecimal(req.getParameter("amount")));
         expenseDto.setDate(parseStringToLocalDate(req.getParameter("date")));
+        expenseDto.setCategories(categoriesString);
 
         return expenseDto;
     }
@@ -61,11 +60,7 @@ public class ExpenseBean {
         expense.setAmount(expenseDto.getAmount());
         expense.setComment(expense.getComment());
         expense.setDate(expenseDto.getDate());
-        expense.getCategories()
-                .forEach(category -> {
-                                        category.setTotal(category.getTotal().add(expenseDto.getAmount()));
-                                        categoryDao.update(category);
-                                     });
+        expense.setCategories(categoryDao.findCategoriesByNames(expenseDto.getCategories()));
         expenseDao.save(expense);
     }
 
