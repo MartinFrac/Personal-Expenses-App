@@ -2,7 +2,7 @@
     <data-source>
         <name>java:ds/tailandczycy</name>
         <class-name>com.mysql.cj.jdbc.MysqlDataSource</class-name>
-        <url>jdbc:mysql://192.168.99.100:6603/tailandczycy</url>
+        <url>jdbc:mysql://192.168.99.100:6600/finance</url>
         <user>root</user>
         <password></password>
     </data-source>
