@@ -39,7 +39,7 @@ public class CategoryDao {
     }
 
     public List<Category> findAll() {
-        final TypedQuery<Category> query = entityManager.createQuery("SELECT c FROM Category c join fetch c.expenses", Category.class);
+        final TypedQuery<Category> query = entityManager.createQuery("SELECT c FROM Category c left join fetch c.expenses", Category.class);
 
         return query.getResultList();
     }
