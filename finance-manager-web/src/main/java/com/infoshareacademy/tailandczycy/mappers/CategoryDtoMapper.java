@@ -16,9 +16,11 @@ public class CategoryDtoMapper {
         categoryDto.setName(category.getName());
         categoryDto.setTotal(category.getTotal());
         categoryDto.setLimit(category.getLimit());
-        categoryDto.setExpenses(category.getExpenses().stream()
-                                    .map(Expense::getName).collect(Collectors.toList()));
-
+        if(category.getExpenses().size()!=0) {
+            categoryDto.setExpenses(category.getExpenses().stream()
+                    .map(Expense::getName)
+                    .collect(Collectors.toList()));
+        }
         return categoryDto;
     }
 }
