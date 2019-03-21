@@ -5,7 +5,6 @@ import com.infoshareacademy.tailandczycy.model.Category;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import java.math.BigDecimal;
 import java.util.List;
@@ -40,7 +39,7 @@ public class CategoryDao {
     }
 
     public List<Category> findAll() {
-        final Query query = entityManager.createQuery("SELECT c FROM Category c join fetch c.expenses");
+        final TypedQuery<Category> query = entityManager.createQuery("SELECT c FROM Category c join fetch c.expenses", Category.class);
 
         return query.getResultList();
     }
