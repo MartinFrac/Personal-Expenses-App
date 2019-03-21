@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 @RequestScoped
 public class CategoryDtoMapper {
 
-    public CategoryDto getCategoryDto(Category category) {
+    public CategoryDto mapToDto(Category category) {
         CategoryDto categoryDto = new CategoryDto();
         categoryDto.setId(category.getId());
         categoryDto.setName(category.getName());
