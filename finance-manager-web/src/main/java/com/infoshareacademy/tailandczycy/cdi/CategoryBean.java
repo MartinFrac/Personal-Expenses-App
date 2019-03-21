@@ -20,7 +20,7 @@ public class CategoryBean {
 
     public List<CategoryDto> getAllCategoryDtos() {
         return categoryDao.findAll().stream()
-                .map(c -> categoryDtoMapper.getCategoryDto(c))
+                .map(c -> categoryDtoMapper.mapToDto(c))
                 .collect(Collectors.toList());
     }
 }
