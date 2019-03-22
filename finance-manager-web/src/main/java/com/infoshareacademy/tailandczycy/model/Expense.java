@@ -75,7 +75,6 @@ public class Expense {
     private String name;
 
     @Column(name = "comment")
-    @NotNull
     private String comment;
 
     @Column(name = "amount")
