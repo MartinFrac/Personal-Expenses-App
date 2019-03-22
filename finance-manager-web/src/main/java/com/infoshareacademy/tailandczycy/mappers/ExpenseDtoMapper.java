@@ -10,11 +10,11 @@ import java.util.stream.Collectors;
 @RequestScoped
 public class ExpenseDtoMapper {
 
-    public ExpenseDto getExpenseDto(Expense expense) {
+    public ExpenseDto mapToDto(Expense expense) {
         ExpenseDto expenseDto = new ExpenseDto();
         expenseDto.setId(expense.getId());
         expenseDto.setName(expense.getName());
-        expenseDto.setDate(expense.getDate());
+        expenseDto.setDate(expense.getDate().toString());
         expenseDto.setAmount(expense.getAmount());
         if(expense.getComment()!=null) {
             expenseDto.setComment(expense.getComment());
