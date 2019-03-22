@@ -1,7 +1,6 @@
 package com.infoshareacademy.tailandczycy.dto;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.util.List;
 
 public class ExpenseDto {
@@ -9,7 +8,7 @@ public class ExpenseDto {
     private String name;
     private String comment;
     private BigDecimal amount;
-    private LocalDate date;
+    private String date;
     private List<String> categories;
 
     public Long getId() {
@@ -42,11 +41,11 @@ public class ExpenseDto {
         this.amount = amount;
     }
 
-    public LocalDate getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
