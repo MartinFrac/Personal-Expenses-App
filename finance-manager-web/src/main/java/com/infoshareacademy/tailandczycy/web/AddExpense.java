@@ -36,6 +36,7 @@ public class AddExpense extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         HashMap<String, Object> dataModel = new HashMap<>();
         if(validator.isExpenseCorrect(req)) {
+            //TODO create expense here and pass as parameter to map to dto
             ExpenseDto expenseDto = expenseBean.getExpenseDto(req);
             expenseBean.saveExpense(expenseDto);
             dataModel.put("state", "added");
