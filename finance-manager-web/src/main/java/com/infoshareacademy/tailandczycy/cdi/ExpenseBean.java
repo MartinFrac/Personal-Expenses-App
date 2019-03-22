@@ -31,7 +31,7 @@ public class ExpenseBean {
         expenseDto.setName(req.getParameter("name"));
         expenseDto.setComment(req.getParameter("comment"));
         expenseDto.setAmount(parseStringToBigDecimal(req.getParameter("amount")));
-        expenseDto.setDate(parseStringToLocalDate(req.getParameter("date")));
+        expenseDto.setDate(req.getParameter("date"));
         expenseDto.setCategories(categoriesString);
 
         return expenseDto;
@@ -47,7 +47,7 @@ public class ExpenseBean {
             expenseDto.setId(expenseById.get().getId());
             expenseDto.setAmount(expenseById.get().getAmount());
             expenseDto.setComment(expenseById.get().getComment());
-            expenseDto.setDate(expenseById.get().getDate());
+            expenseDto.setDate(expenseById.get().getDate().toString());
 
             return Optional.of(expenseDto);
         }
@@ -59,12 +59,12 @@ public class ExpenseBean {
         expense.setName(expenseDto.getName());
         expense.setAmount(expenseDto.getAmount());
         expense.setComment(expense.getComment());
-        expense.setDate(expenseDto.getDate());
+        expense.setDate(parseStringToLocalDate(expenseDto.getDate()));
         expense.setCategories(categoryDao.findCategoriesByNames(expenseDto.getCategories()));
         expenseDao.save(expense);
     }
 
-    private LocalDate parseStringToLocalDate(String date) {
+    public LocalDate parseStringToLocalDate(String date) {
         return LocalDate.parse(date);
     }
 
