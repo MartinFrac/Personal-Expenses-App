@@ -31,13 +31,23 @@
                         <tr>
                             <td>${e.name}</td>
                             <td>
+                                <#if e.categories??>
                                 <#list e.categories as c>
-                                    ${c.name}<#sep>, </#sep>
+                                    ${c}<#sep>, </#sep>
                                 </#list>
+                                <#else>
+                                    -
+                                </#if>
                             </td>
                             <td>${e.date}</td>
                             <td>${e.amount}</td>
-                            <td>${e.comment}</td>
+                            <td>
+                                <#if e.comment??>
+                                    ${e.comment}
+                                    <#else>
+                                    -
+                                </#if>
+                            </td>
                             <td>
                                 <form method="post" action="/home">
                                     <button type="button" name="editId" value="${e.id}" class="btn btn-primary btn-sm">Edit</button>&nbsp;
