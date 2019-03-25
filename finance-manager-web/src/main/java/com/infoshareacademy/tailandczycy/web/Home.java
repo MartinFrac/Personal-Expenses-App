@@ -1,8 +1,8 @@
 package com.infoshareacademy.tailandczycy.web;
 
+import com.infoshareacademy.tailandczycy.cdi.ExpenseBean;
 import com.infoshareacademy.tailandczycy.cdi.TemplateBean;
-import com.infoshareacademy.tailandczycy.dao.ExpenseDao;
-import com.infoshareacademy.tailandczycy.model.Expense;
+import com.infoshareacademy.tailandczycy.dto.ExpenseDto;
 import com.infoshareacademy.tailandczycy.statics.Templates;
 
 import javax.inject.Inject;
@@ -21,13 +21,13 @@ public class Home extends HttpServlet {
     @Inject
     private TemplateBean templateBean;
     @Inject
-    ExpenseDao expenseDao;
+    private ExpenseBean expenseBean;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
         Map<String, Object> dataModel = new HashMap<>();
-        List<Expense> expenses = expenseDao.findAll();
+        List<ExpenseDto> expenses = expenseBean.getAllExpenseDtos();
         dataModel.put("expenses", expenses);
         templateBean.handleTemplate(dataModel, Templates.HOME, resp, getServletContext());
     }
