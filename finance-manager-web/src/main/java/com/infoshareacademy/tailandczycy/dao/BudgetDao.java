@@ -5,7 +5,7 @@ import com.infoshareacademy.tailandczycy.model.Budget;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import java.util.List;
 
 @Stateless
@@ -35,7 +35,7 @@ public class BudgetDao {
     }
 
     public List<Budget> findAll() {
-        final Query query = entityManager.createQuery("SELECT s FROM Budget s");
+        final TypedQuery<Budget> query = entityManager.createQuery("SELECT s FROM Budget s", Budget.class);
 
         return query.getResultList();
     }
