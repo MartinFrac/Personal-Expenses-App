@@ -44,7 +44,7 @@ public class Validator {
     }
 
     private boolean isNameCorrect(String name) {
-        if (name == null || name.isEmpty() || !StringUtils.isNumeric(name) || isLessThan15Letters(name)) {
+        if (name == null || name.isEmpty() || isLessThan15Letters(name)) {
             return false;
         }
         return true;

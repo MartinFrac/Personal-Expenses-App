@@ -44,7 +44,7 @@ import java.util.Objects;
         ),
         @NamedQuery(
                 name = "Expense.findExpensesByName",
-                query = "SELECT e FROM Expense e WHERE e.name = :param1 ORDER BY e.date"
+                query = "SELECT e FROM Expense e WHERE e.name IN :param1"
         ),
         @NamedQuery(
                 name = "Expense.orderByDateAsc",
@@ -75,7 +75,6 @@ public class Expense {
     private String name;
 
     @Column(name = "comment")
-    @NotNull
     private String comment;
 
     @Column(name = "amount")
@@ -92,10 +91,6 @@ public class Expense {
             inverseJoinColumns = @JoinColumn(name = "category_id", referencedColumnName = "id"),
             uniqueConstraints = @UniqueConstraint(columnNames = {"expense_id", "category_id"}))
     private List<Category> categories;
-
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
 
     public Expense() {
     }

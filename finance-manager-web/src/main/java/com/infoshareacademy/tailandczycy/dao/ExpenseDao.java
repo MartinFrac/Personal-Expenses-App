@@ -10,6 +10,7 @@ import javax.persistence.TypedQuery;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @Stateless
 public class ExpenseDao {
@@ -36,12 +37,12 @@ public class ExpenseDao {
         }
     }
 
-    public Expense findById(Long id) {
-        return entityManager.find(Expense.class, id);
+    public Optional<Expense> findById(Long id) {
+        return Optional.ofNullable(entityManager.find(Expense.class, id));
     }
 
     public List<Expense> findAll() {
-        final TypedQuery<Expense> query = entityManager.createQuery("SELECT s FROM Expense s", Expense.class);
+        final TypedQuery<Expense> query = entityManager.createQuery("SELECT DISTINCT s FROM Expense s LEFT JOIN FETCH s.categories", Expense.class);
 
         return query.getResultList();
     }
@@ -95,7 +96,7 @@ public class ExpenseDao {
         return query.getResultList();
     }
 
-    public List<Expense> findExpensesByName(String string) {
+    public List<Expense> findExpensesByName(List<String> string) {
         final TypedQuery<Expense> query = entityManager
                 .createNamedQuery("Expense.findExpensesByName", Expense.class);
         query.setParameter(PARAM1, string);

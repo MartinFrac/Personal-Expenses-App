@@ -5,10 +5,10 @@ import com.infoshareacademy.tailandczycy.model.Category;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 
 import static com.infoshareacademy.tailandczycy.dao.ExpenseDao.PARAM1;
 
@@ -18,13 +18,13 @@ public class CategoryDao {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public Long save(Category s) {
-        entityManager.persist(s);
-        return s.getId();
+    public Long save(Category c) {
+        entityManager.persist(c);
+        return c.getId();
     }
 
-    public Category update(Category s) {
-        return entityManager.merge(s);
+    public Category update(Category c) {
+        return entityManager.merge(c);
     }
 
     public void delete(Long id) {
@@ -34,12 +34,12 @@ public class CategoryDao {
         }
     }
 
-    public Category findById(Long id) {
-        return entityManager.find(Category.class, id);
+    public Optional<Category> findById(Long id) {
+        return Optional.ofNullable(entityManager.find(Category.class, id));
     }
 
     public List<Category> findAll() {
-        final Query query = entityManager.createQuery("SELECT s FROM Category s");
+        final TypedQuery<Category> query = entityManager.createQuery("SELECT DISTINCT c FROM Category c LEFT JOIN FETCH c.expenses", Category.class);
 
         return query.getResultList();
     }
