@@ -3,7 +3,6 @@ package com.infoshareacademy.tailandczycy.cdi;
 import com.infoshareacademy.tailandczycy.dao.CategoryDao;
 import com.infoshareacademy.tailandczycy.mappers.CategoryDtoMapper;
 import com.infoshareacademy.tailandczycy.dto.CategoryDto;
-
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import java.util.List;
