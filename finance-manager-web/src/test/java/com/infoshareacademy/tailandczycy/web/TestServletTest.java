@@ -1,7 +1,12 @@
 package com.infoshareacademy.tailandczycy.web;
 
-import static org.junit.Assert.*;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
-public class TestServletTest {
+class TestServletTest {
 
+    @Test
+    void test() {
+        Assertions.assertTrue(true);
+    }
 }
