@@ -2,6 +2,7 @@ package com.infoshareacademy.tailandczycy.dto;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Objects;
 
 public class ExpenseDto {
     private Long id;
@@ -49,11 +50,25 @@ public class ExpenseDto {
         this.date = date;
     }
 
-    public List<String> getCategories() {
-        return categories;
+    public List<String> getCategories() { return categories; }
+
+    public void setCategories(List<String> categories) { this.categories = categories; }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ExpenseDto that = (ExpenseDto) o;
+        return id.equals(that.id) &&
+                name.equals(that.name) &&
+                Objects.equals(comment, that.comment) &&
+                amount.equals(that.amount) &&
+                date.equals(that.date) &&
+                categories.equals(that.categories);
     }
 
-    public void setCategories(List<String> categories) {
-        this.categories = categories;
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, comment, amount, date, categories);
     }
 }
