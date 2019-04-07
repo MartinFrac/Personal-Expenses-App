@@ -95,6 +95,10 @@ public class Expense {
     public Expense() {
     }
 
+    public Expense(long id) {
+        this.id = id;
+    }
+
     public Expense(String name, String comment, BigDecimal amount, LocalDate date, List<Category> categories) {
         this.name = name;
         this.comment = comment;
