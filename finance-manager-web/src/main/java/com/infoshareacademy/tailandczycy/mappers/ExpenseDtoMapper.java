@@ -5,6 +5,7 @@ import com.infoshareacademy.tailandczycy.model.Category;
 import com.infoshareacademy.tailandczycy.model.Expense;
 
 import javax.faces.bean.RequestScoped;
+import java.util.Collections;
 import java.util.stream.Collectors;
 
 @RequestScoped
@@ -23,6 +24,8 @@ public class ExpenseDtoMapper {
             expenseDto.setCategories(expense.getCategories().stream()
                     .map(Category::getName)
                     .collect(Collectors.toList()));
+        } else {
+            expenseDto.setCategories(Collections.emptyList());
         }
         return expenseDto;
     }
