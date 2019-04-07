@@ -1,13 +1,10 @@
 package com.infoshareacademy.tailandczycy.web;
 
 import com.infoshareacademy.tailandczycy.cdi.TemplateBean;
-import com.infoshareacademy.tailandczycy.mappers.ExpenseDtoMapper;
-import com.infoshareacademy.tailandczycy.model.Expense;
 import com.infoshareacademy.tailandczycy.statics.Templates;
-import com.infoshareacademy.tailandczycy.validations.Validator;
+import com.infoshareacademy.tailandczycy.validations.ExpenseValidator;
 import com.infoshareacademy.tailandczycy.cdi.ExpenseBean;
 import com.infoshareacademy.tailandczycy.dto.ExpenseDto;
-import org.apache.logging.log4j.core.config.plugins.convert.TypeConverters;
 
 import javax.inject.Inject;
 import javax.servlet.annotation.WebServlet;
@@ -24,7 +21,7 @@ import java.util.HashMap;
 public class AddExpense extends HttpServlet {
 
     @Inject
-    Validator validator;
+    ExpenseValidator expenseValidator;
 
     @Inject
     TemplateBean templateBean;
@@ -41,7 +38,7 @@ public class AddExpense extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         HashMap<String, Object> dataModel = new HashMap<>();
-        if(validator.isExpenseCorrect(req)) {
+        if(expenseValidator.areFieldsCorrect(req)) {
             ExpenseDto expenseDto = new ExpenseDto();
             expenseDto.setName(req.getParameter("name"));
             expenseDto.setComment(req.getParameter("comment"));

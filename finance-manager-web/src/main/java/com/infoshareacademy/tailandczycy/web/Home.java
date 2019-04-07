@@ -34,13 +34,12 @@ public class Home extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        RequestDispatcher requestDispatcher;
         if (req.getParameter("edit")!=null) {
-            RequestDispatcher requestDispatcher = req.getRequestDispatcher("/edit-expense");
-            requestDispatcher.forward(req, resp);
+            requestDispatcher = req.getRequestDispatcher("/edit-expense");
+        } else {
+            requestDispatcher = req.getRequestDispatcher("/delete-expense");
         }
-        if (req.getParameter("delete")!=null) {
-            RequestDispatcher requestDispatcher = req.getRequestDispatcher("/delete-expense");
-            requestDispatcher.forward(req,resp);
-        }
+        requestDispatcher.forward(req, resp);
     }
 }
