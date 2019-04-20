@@ -1,11 +1,14 @@
-$(document).ready(function () {
+'use strict';
+
+$(function () {
     $('#sidebarCollapse').on('click', function () {
         $('#sidebar').toggleClass('active');
     });
 });
 $(function () {
+    let date = new Date();
     $('#datepicker').datepicker({
-        format: "dd/mm/yyyy",
+        format: "yyyy/mm/dd",
         todayHighlight: true,
         showOtherMonths: true,
         selectOtherMonths: true,
@@ -13,5 +16,6 @@ $(function () {
         changeMonth: true,
         changeYear: true,
         orientation: "button"
-    }).datepicker("setDate", new Date());
+    }).datepicker("setDate", date);
+    document.getElementById('inputDate').value = date.getFullYear()+"/"+(date.getMonth()+1)+"/"+date.getDate();
 });
