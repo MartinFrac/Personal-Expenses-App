@@ -1,22 +1,29 @@
-(function () {
-    var categoryContainer1 = document.getElementById("categoryContainer1");
-    var categoryContainer2 = document.getElementById("categoryContainer2");
-    var categoryContainer3 = document.getElementById("categoryContainer3");
-    var ourRequest = new XMLHttpRequest();
+'use strict';
+
+let globalCategories;
+
+$(function () {
+    let categoryContainer1 = document.getElementById("categoryContainer1");
+    let categoryContainer2 = document.getElementById("categoryContainer2");
+    let categoryContainer3 = document.getElementById("categoryContainer3");
+    let ourRequest = new XMLHttpRequest();
     ourRequest.open('GET', 'http://localhost:8080/resources/categories');
     ourRequest.onload = function() {
-        var ourData = JSON.parse(ourRequest.responseText);
-        var htmlString1 = "";
-        var htmlString2 = "";
-        var htmlString3 = "";
-        var counter1 = 0;
-        var counter2 = 1;
-        var counter3 = 2;
-        for(var i = 0; i < ourData.length; i++) {
-            var stringHelper = "<label class='containerCategory'>" + ourData[i].name +
-                                "<input type='checkbox' name='categories' value=" + ourData[i].name + ">" +
-                                "<span class='checkmark'></span>" +
-                                "</label>";
+
+        let ourData = JSON.parse(ourRequest.responseText);
+        globalCategories = ourData;
+        let htmlString1 = "";
+        let htmlString2 = "";
+        let htmlString3 = "";
+        let counter1 = 0;
+        let counter2 = 1;
+        let counter3 = 2;
+
+        for(let i = 0; i < ourData.length; i++) {
+            let stringHelper = `<label class="containerCategory" id="cat${ourData[i].id}">${ourData[i].name}` +
+                                `<input type="checkbox" name="categories" value="${ourData[i].name}">` +
+                                `<span class="checkmark"></span>` +
+                                `</label>`;
             if(counter1 === i) {
                 htmlString1 += stringHelper;
             } else if (counter2 === i) {
@@ -36,4 +43,45 @@
         categoryContainer3.insertAdjacentHTML('beforeend', htmlString3);
     };
     ourRequest.send();
-})();
+});
+
+$('#inputAmount').on('input', function () {
+
+    let amount = parseInt($('#inputAmount').val());
+    let total;
+    let limit;
+    for(let i = 0; i<globalCategories.length; i++) {
+        total = globalCategories[i].total;
+        limit = globalCategories[i].limit;
+        if (total + amount > limit) {
+            $(`#cat${globalCategories[i].id}`)
+                .children('input').prop('disabled', true).prop('checked', false).end()
+                .children('span').addClass('checkmarkDisabled');
+        } else {
+            $(`#cat${globalCategories[i].id}`)
+                .children('input').prop('disabled', false).end()
+                .children('span').removeClass('checkmarkDisabled');
+        }
+    }
+});
+
+function f() {
+    let amount = parseInt($('#inputAmount').val());
+    let total;
+    let limit;
+    for (let i = 0; i < globalCategories.length; i++) {
+        total = globalCategories[i].total;
+        limit = globalCategories[i].limit;
+        if (total + amount > limit) {
+            $(`#cat${globalCategories[i].id}`)
+                .children('input').prop('disabled', true).prop('checked', false).end()
+                .children('span').addClass('checkmarkDisabled');
+        } else {
+            $(`#cat${globalCategories[i].id}`)
+                .children('input').prop('disabled', false).end()
+                .children('span').removeClass('checkmarkDisabled');
+        }
+    }
+}
+
+setTimeout(f, 1000);
