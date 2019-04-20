@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,7 +23,13 @@ public class ExpenseValidator implements Validator{
 
     public boolean areFieldsCorrect(HttpServletRequest request) {
 
-        List<String> categoryList = new ArrayList<>(Arrays.asList(request.getParameterValues("categories")));
+        List<String> categoryList;
+
+        if(request.getParameterValues("categories")==null) {
+            return false;
+        } else {
+            categoryList = new ArrayList<>(Arrays.asList(request.getParameterValues("categories")));
+        }
 
         if (!isNameCorrect(request.getParameter("name"))) {
             return false;
@@ -62,8 +69,10 @@ public class ExpenseValidator implements Validator{
     }
 
     private boolean isDateCorrect(String date) {
+        if(date==null) return false;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/M/d");
         try {
-            LocalDate.parse(date);
+            LocalDate.parse(date, formatter);
             return true;
         } catch (DateTimeParseException e) {
             return false;
