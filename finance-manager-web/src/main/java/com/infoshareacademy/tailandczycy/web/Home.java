@@ -34,6 +34,7 @@ public class Home extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
         RequestDispatcher requestDispatcher;
         if (req.getParameter("edit")!=null) {
             requestDispatcher = req.getRequestDispatcher("/edit-expense");
