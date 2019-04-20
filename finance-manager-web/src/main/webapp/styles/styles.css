@@ -61,6 +61,20 @@ span {
     text-shadow: white;
 }
 
+#submitDiv{
+    margin-top: 50px;
+}
+
+#submitDiv button {
+    margin-left: 17%;
+    padding: 10px 70px;
+    border-radius: 25px;
+}
+
+form div.row:nth-child(5) {
+    margin-top: 50px;
+}
+
 /* ---------------------------------------------------
     SIDEBAR STYLE
 ----------------------------------------------------- */
@@ -296,9 +310,17 @@ a.article:hover {
     background-color: #cccccc;
 }
 
+.checkmarkDisabled {
+    background-color: white;
+}
+
 /* On mouse-over, add a grey background color */
 .containerCategory:hover input ~ .checkmark {
-    background-color: #ccc;
+    background-color: #6d6d6d;
+}
+
+.containerCategory:hover input ~ .checkmarkDisabled {
+    background-color: white;
 }
 
 /* When the checkbox is checked, add a blue background */
