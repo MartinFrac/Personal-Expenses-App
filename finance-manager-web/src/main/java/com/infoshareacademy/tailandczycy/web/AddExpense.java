@@ -37,7 +37,7 @@ public class AddExpense extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        HashMap<String, Object> dataModel = new HashMap<>();
+
         if(expenseValidator.areFieldsCorrect(req)) {
             ExpenseDto expenseDto = new ExpenseDto();
             expenseDto.setName(req.getParameter("name"));
@@ -46,12 +46,8 @@ public class AddExpense extends HttpServlet {
             expenseDto.setDate(req.getParameter("date"));
             expenseDto.setCategories(Arrays.asList(req.getParameterValues("categories")));
             expenseBean.saveExpense(expenseDto);
-            dataModel.put("state", "added");
-            templateBean.handleTemplate(dataModel, Templates.HOME, resp, getServletContext());
-        } else {
-            dataModel.put("state", "error");
-            templateBean.handleTemplate(dataModel, Templates.HOME, resp, getServletContext());
         }
+        resp.sendRedirect("/home");
     }
 }
 
