@@ -12,9 +12,9 @@
         var counter1 = 0;
         var counter2 = 1;
         var counter3 = 2;
-        for(var i = 0; i< ourData.length; i++) {
+        for(var i = 0; i < ourData.length; i++) {
             var stringHelper = "<label class='containerCategory'>" + ourData[i].name +
-                                "<input type='checkbox'>" +
+                                "<input type='checkbox' name='categories' value=" + ourData[i].name + ">" +
                                 "<span class='checkmark'></span>" +
                                 "</label>";
             if(counter1 === i) {
